@@ -19,7 +19,9 @@ class NN(torch.nn.Module):
 
 def main():
     x = np.random.rand(100, 1)  # input data
-    y = 2 * x + 3  # output data
+    # y = 2 * x + 3  # output data
+    y = np.sqrt(2 * x**2 + 4)  # output function to approximate
+
     inputs = torch.from_numpy(x).float()
     labels = torch.from_numpy(y).float()
 
@@ -27,7 +29,7 @@ def main():
     criterion = torch.nn.MSELoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 
-    for epoch in range(100):
+    for epoch in range(1000):
         optimizer.zero_grad()
         outputs = model(inputs)
         loss = criterion(outputs, labels)
